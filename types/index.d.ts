@@ -1,5 +1,9 @@
 /* eslint-disable no-unused-vars */
 
+import { Control, FieldPath } from "react-hook-form/dist";
+import { z } from "zod";
+import { authFormSchema } from "../lib/utils";
+
 declare type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: { [key: string]: string | string[] | undefined };
@@ -8,14 +12,14 @@ declare type SearchParamProps = {
 // ========================================
 
 declare type SignUpParams = {
-  firstName: string;
-  lastName: string;
-  address1: string;
-  city: string;
-  state: string;
-  postalCode: string;
-  dateOfBirth: string;
-  ssn: string;
+  firstName?: string;
+  lastName?: string;
+  address1?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  dateOfBirth?: string;
+  ssn?: string;
   email: string;
   password: string;
 };
@@ -33,6 +37,7 @@ declare type User = {
   dwollaCustomerId: string;
   firstName: string;
   lastName: string;
+  name: string;
   address1: string;
   city: string;
   state: string;
@@ -191,6 +196,14 @@ declare interface AuthFormProps {
   type: "sign-in" | "sign-up";
 }
 
+declare interface FormInputType {
+  control: Control<z.infer<typeof authFormSchema>>;
+  name: string;
+  label: string;
+  placeholder: string;
+  type: string;
+}
+
 declare interface BankDropdownProps {
   accounts: Account[];
   setValue?: UseFormSetValue<any>;
@@ -210,6 +223,7 @@ declare interface TotlaBalanceBoxProps {
 
 declare interface FooterProps {
   user: User;
+  type?: "mobile" | "desktop";
 }
 
 declare interface RightSidebarProps {
@@ -292,7 +306,7 @@ declare interface getTransactionsByBankIdProps {
   bankId: string;
 }
 
-declare interface signInProps {
+declare interface SignInProps {
   email: string;
   password: string;
 }
