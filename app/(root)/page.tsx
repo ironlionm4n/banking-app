@@ -4,9 +4,25 @@ import TotalBalanceBox from "../../components/TotalBalanceBox";
 import RightSidebar from "../../components/RightSidebar";
 import { getLoggedInUser } from "../../lib/actions/user.actions";
 import { redirect } from "next/navigation";
+import { getAccount, getAccounts } from "../../lib/actions/bank.actions";
+import { SearchParamProps } from "../../types";
+import RecentTransactions from "../../components/RecentTransactions";
 
-const Dashboard = async () => {
+const Dashboard = async ({ searchParams: { id, page } }: SearchParamProps) => {
+  const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
+  const accounts = await getAccounts({ userId: loggedIn?.$id });
+
+  console.log("Dashboard -> accounts", accounts);
+
+  if (!accounts) {
+    return;
+  }
+  const accountsData = accounts?.data;
+
+  const appwriteItemId = (id as string) || accountsData[0]?.appwriteItemId;
+
+  const account = await getAccount({ appwriteItemId });
 
   if (!loggedIn) {
     redirect("/sign-in");
@@ -19,21 +35,26 @@ const Dashboard = async () => {
           <HeaderBox
             type="greeting"
             title="Welcome"
-            user={loggedIn?.name || "Guest"}
+            user={loggedIn?.firstName || "Guest"}
             subtext="Here you can find all the information you need to get started."
           />
           <TotalBalanceBox
-            accounts={[]}
-            totalBanks={1}
-            totalCurrentBalance={1250.66}
+            accounts={accountsData}
+            totalBanks={accounts?.totalBanks}
+            totalCurrentBalance={accounts?.totalCurrentBalance}
           />
         </header>
-        recent transactions
+        <RecentTransactions
+          accounts={accountsData}
+          transactions={account?.transactions}
+          appwriteItemId={appwriteItemId}
+          page={currentPage}
+        />
       </div>
       <RightSidebar
         user={loggedIn}
-        transactions={[]}
-        banks={[{ currentBalance: 1234.5 }, { currentBalance: 465.99 }]}
+        transactions={accounts?.transactions}
+        banks={accountsData?.slice(0, 2)}
       />
     </section>
   );
