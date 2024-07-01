@@ -5,6 +5,8 @@ import React from "react";
 import { sidebarLinks } from "../constants";
 import { cn } from "../lib/utils";
 import { usePathname } from "next/navigation";
+import Footer from "./Footer";
+import { SiderbarProps } from "../types";
 
 const SideBar = ({ user }: SiderbarProps) => {
   const pathName = usePathname();
@@ -19,7 +21,7 @@ const SideBar = ({ user }: SiderbarProps) => {
             alt="Next Bank logo"
             className="size=[24px] max-xl:size-14"
           />
-          <h1 className="sidebar-logo">Next Bank</h1>
+          <h1 className="sidebar-logo">Horizon</h1>
         </Link>
         {sidebarLinks.map((link) => {
           const isActiveLink =
@@ -55,7 +57,7 @@ const SideBar = ({ user }: SiderbarProps) => {
         })}
         USER
       </nav>
-      NavBar Footer
+      <Footer user={user} />
     </section>
   );
 };
