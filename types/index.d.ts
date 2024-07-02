@@ -53,20 +53,6 @@ declare type NewUserParams = {
   password: string;
 };
 
-declare type Account = {
-  id: string;
-  availableBalance: number;
-  currentBalance: number;
-  officialName: string;
-  mask: string;
-  institutionId: string;
-  name: string;
-  type: string;
-  subtype: string;
-  appwriteItemId: string;
-  sharableId: string;
-};
-
 declare type Transaction = {
   id: string;
   $id: string;
@@ -84,6 +70,20 @@ declare type Transaction = {
   channel: string;
   senderBankId: string;
   receiverBankId: string;
+};
+
+declare type Account = {
+  id: string;
+  availableBalance: number;
+  currentBalance: number;
+  officialName: string;
+  mask: string;
+  institutionId: string;
+  name: string;
+  type: string;
+  subtype: string;
+  appwriteItemId: string;
+  shareableId: string;
 };
 
 declare type Bank = {
