@@ -128,7 +128,7 @@ export const getLoggedInUser = async () => {
     const { account } = await createSessionClient();
     const result = await account.get();
     const user = await getUserInfo({ userId: result.$id });
-    console.log("getLoggedInUser -> user", user);
+    //console.log("getLoggedInUser -> user", user);
     return parseStringify(user);
   } catch (error) {
     console.error("Error Getting Logged In User", error);
@@ -292,7 +292,7 @@ export const getBank = async ({ documentId }: getBankProps) => {
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
-    console.error("An error occurred while getting the banks:", error);
+    console.error("An error occurred while getting the bank:", error);
   }
 };
 
@@ -305,10 +305,10 @@ export const getBankByAccountId = async ({
     const bank = await database.listDocuments(
       DATABASE_ID!,
       BANK_COLLECTION_ID!,
-      [Query.equal("$id", [accountId])]
+      [Query.equal("accountId", [accountId])]
     );
 
-    if (bank.total != 1) return null;
+    if (bank.total !== 1) return null;
 
     return parseStringify(bank.documents[0]);
   } catch (error) {

@@ -13,7 +13,7 @@ const Dashboard = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const loggedIn = await getLoggedInUser();
   const accounts = await getAccounts({ userId: loggedIn?.$id });
 
-  console.log("Dashboard -> accounts", accounts);
+  // console.log("Dashboard -> accounts", accounts);
 
   if (!accounts) {
     return;
@@ -53,7 +53,7 @@ const Dashboard = async ({ searchParams: { id, page } }: SearchParamProps) => {
       </div>
       <RightSidebar
         user={loggedIn}
-        transactions={accounts?.transactions}
+        transactions={account?.transactions}
         banks={accountsData?.slice(0, 2)}
       />
     </section>

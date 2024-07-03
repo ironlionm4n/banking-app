@@ -103,7 +103,7 @@ declare type AccountTypes =
   | "investment"
   | "other";
 
-declare type Category = "Food and Drink" | "Travel" | "Transfer";
+declare type TCategory = "Food and Drink" | "Travel" | "Transfer";
 
 declare type CategoryCount = {
   name: string;

@@ -3,7 +3,6 @@
 import {
   ACHClass,
   CountryCode,
-  Transaction,
   TransferAuthorizationCreateRequest,
   TransferCreateRequest,
   TransferNetwork,
@@ -21,6 +20,7 @@ import {
   getAccountProps,
   getInstitutionProps,
   getTransactionsProps,
+  Transaction,
 } from "../../types";
 
 // Get multiple bank accounts

@@ -38,7 +38,7 @@ const CategoryBadge = ({ category }: CategoryBadgeProps) => {
 };
 
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {
-  console.log("TransactionsTable -> transactions", transactions);
+  //console.log("TransactionsTable -> transactions", transactions);
   return (
     <Table>
       <TableHeader className="bg-[#f9fafb]">
